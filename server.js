@@ -1,5 +1,6 @@
 //Need to import express framework, and other libraries
 const express = require('express');
+const path = require('path');
 const methodOverride = require('method-override');
 const flash = require('connect-flash');
 const session = require('express-session');
@@ -50,6 +51,10 @@ app.set('view engine', 'handlebars');
 //Invoke badyParser middleware
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
+
+//Static folder
+app.use(express.static(path.join(__dirname, 'public')));
+
 // method override mw, used to change form method
 app.use(methodOverride('_method'))
 

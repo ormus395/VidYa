@@ -9,6 +9,7 @@
   "author": "Jarec Turner",
   "license": "ISC",
   "dependencies": {
+    "bcryptjs": "^2.4.3",
     "body-parser": "^1.18.2",
     "connect-flash": "^0.1.1",
     "express": "^4.16.1",
@@ -16,7 +17,9 @@
     "express-session": "^1.15.6",
     "method-override": "^2.3.10",
     "mongoose": "^4.12.0",
-    "morgan": "^1.9.0"
+    "morgan": "^1.9.0",
+    "passport": "^0.4.0",
+    "passport-local": "^1.0.0"
   },
   "devDependencies": {
     "babel-cli": "^6.26.0",
