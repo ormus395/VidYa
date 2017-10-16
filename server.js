@@ -12,6 +12,7 @@ const morgan = require('morgan');
 const exhbs = require('express-handlebars');
 
 //Dev created libraries/ dependencies/ middleware/ routing ect...
+const database = require('./config/database'); //Database connection
 const index = require('./routes/index'); //Index routing middleware import
 const about = require('./routes/about'); //About routing middleware import
 const ideas = require('./routes/ideas'); //Ideas routing middleware import
@@ -31,7 +32,7 @@ app.listen(port, () => {
 //Map global promise, to get rid of mongoose derpeciating mpromise warning
 mongoose.Promise = global.Promise;
 //Connect to mongoose database
-mongoose.connect('mongodb://admin:admin@ds147544.mlab.com:47544/vidya')
+mongoose.connect(database)
   .then(() => { 
     console.log('Connected to MongoDB'); 
   })

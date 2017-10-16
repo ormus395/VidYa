@@ -15,6 +15,7 @@ router.get('/', (req, res) => {
 });
 
 router.post('/', (req, res) => {
+  console.log(req.body)
   let errors = [];
   if(!req.body.title) {
     errors.push({text: 'Please add a title'});
@@ -79,6 +80,16 @@ router.get('/edit/:id', (req, res) => {
     })
   });
 })
+
+//Get ideas by query param
+router.get('/search', (req, res) => {
+  Ideas.findOne({_id: req.query.id})
+    .then(idea => {
+      res.json(idea)
+    })
+})
+
+
 
 router.get('/add', (req, res) => {
   res.render('ideas/add');
