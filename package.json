@@ -4,7 +4,8 @@
   "description": "Full stack app that allows you to save personal video ideas for youtube or other video platforms.",
   "main": "server.js",
   "scripts": {
-    "node": "node server.js"
+    "start": "noder server",
+    "node": "node server"
   },
   "author": "Jarec Turner",
   "license": "ISC",

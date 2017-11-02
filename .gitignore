@@ -57,5 +57,3 @@ typings/
 # dotenv environment variables file
 .env
 
-# config files for DB connection and the like
-config/
