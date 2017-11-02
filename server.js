@@ -6,12 +6,14 @@ const flash = require('connect-flash');
 const session = require('express-session');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
+const passport = require('passport');
 //Optional import logger library
 const morgan = require('morgan');
 //Import view engine library
 const exhbs = require('express-handlebars');
 
 //Dev created libraries/ dependencies/ middleware/ routing ect...
+require('./config/passport')(passport);
 const database = require('./config/database'); //Database connection
 const index = require('./routes/index'); //Index routing middleware import
 const about = require('./routes/about'); //About routing middleware import
@@ -32,7 +34,9 @@ app.listen(port, () => {
 //Map global promise, to get rid of mongoose derpeciating mpromise warning
 mongoose.Promise = global.Promise;
 //Connect to mongoose database
-mongoose.connect(database)
+mongoose.connect(database.mongURI, {
+  useMongoClient: true
+})
   .then(() => { 
     console.log('Connected to MongoDB'); 
   })
@@ -65,6 +69,9 @@ app.use(session({
   saveUninitialized: true
 }));
 
+app.use(passport.initialize());
+app.use(passport.session());
+
 app.use(flash());
 
 //Global variables for flash
@@ -72,6 +79,7 @@ app.use(function(req, res, next) {
   res.locals.success_msg = req.flash('success_msg');
   res.locals.error_msg = req.flash('error_msg');
   res.locals.error = req.flash('error');
+  res.locals.user = req.user || null;
   next();
 });
 /*

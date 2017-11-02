@@ -21,17 +21,6 @@ const UserSchema = new Schema({
   }
 });
 
-module.exports.addUser = (user, callback) => {
-  bcrypt.genSalt(16, (err, salt) => {
-    bcrypt.hash(user.password, salt, (err, hash) => {
-      if(err) throw err;
-      user.password = hash;
-      user.save(callback);
-    });
-  });
-}
-
-
 const User = mongoose.model('Users', UserSchema);
 
 module.exports = User;
